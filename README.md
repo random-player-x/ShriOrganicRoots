@@ -1,10 +1,10 @@
 
 # An e-commerce site 
 
-cd backend 
-npm install 
-node index
+cd backend <br>
+npm install <br>
+node index <br> <br>
 
-cd frontend
-npm install 
-npm run dev
+cd frontend <br>
+npm install <br>
+npm run dev <br>
