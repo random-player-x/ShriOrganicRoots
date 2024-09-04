@@ -4,6 +4,7 @@ import SIGNUP, { SignupPage } from './pages/Signup'
 import SIGNIN, { SigninPage } from './pages/Signin'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Dashboard } from './pages/Dashboard'
+import ProductDetail from './pages/ProductDescription'
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
           { token ? <Route path="/dashboard" element={<Dashboard />} />: "You are not signed in" }
           <Route path="/signin" element={<SIGNIN />} />
           <Route path="/signup" element={<SIGNUP />} />
-
+          <Route path = '/productdetail' element={<ProductDetail/>} />
 
         </Routes>
       </BrowserRouter>
