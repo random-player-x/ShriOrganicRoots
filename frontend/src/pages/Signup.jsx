@@ -1,7 +1,5 @@
 import { RecoilRoot, useRecoilState } from "recoil";
-import { Heading1, Subheading } from "../components/Heading";
-import { Inputbox } from "../components/Inputboxes";
-import { username, userfirstname, userlastname, userpassword } from "../atoms/signupatoms";
+import { userEmail, username, userpassword } from "../atoms/signupatoms";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -9,29 +7,39 @@ import { Dashboard } from "./Dashboard";
 import spicesbg from '../assets/spicesbg.jpg'
 
 export function SignupPage() {
-    const [firstname, setFirstname] = useRecoilState(userfirstname);
-    const [lastname, setLastname] = useRecoilState(userlastname);
+
+
     const [usernames, setUsername] = useRecoilState(username);
     const [password, setPassword] = useRecoilState(userpassword);
-    const [success, setSuccess] = useState(null);
+    const [email, setEmail] = useRecoilState(userEmail)
+    const [errormessgae, setErrormessage] = useState('');
+
     const navigate = useNavigate();
     const handleSignup = () => {
-        axios.post("http://localhost:3000/api/v1/user/signup", {
-            "firstName": firstname,
-            "lastName": lastname,
+      try{
+        axios.post("https://organic-spices.azurewebsites.net/api/signup", {
             "username": usernames,
-            "password": password
+            "password": password,
+            "email": email
         })
         .then(response => {
-            localStorage.setItem('token', response.data.token)
-            navigate('/dashboard');
-            setSuccess(true);
-
+            if (!response.data.token || response.data.token ==''){
+              setErrormessage(response.data);
+            }else{
+              
+              localStorage.setItem('token', response.data.token)
+              navigate('/dashboard');
+            }
+            
         })
         .catch(error => {
             console.error("Error signing up:", error);
-            setSuccess(false);
         });
+      }catch{
+
+
+      }
+        
     };
 
     return (
@@ -84,33 +92,6 @@ export function SignupPage() {
             className="flex flex-col"
             onSubmit={(e) => e.preventDefault()}
           >
-            {/* First Name */}
-            <div className="flex flex-col pt-4">
-              <label htmlFor="firstname" className="text-lg">
-                First Name
-              </label>
-              <input
-                type="text"
-                id="firstname"
-                placeholder="First Name"
-                onChange={(e) => setFirstname(e.target.value)}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-
-            {/* Last Name */}
-            <div className="flex flex-col pt-4">
-              <label htmlFor="lastname" className="text-lg">
-                Last Name
-              </label>
-              <input
-                type="text"
-                id="lastname"
-                placeholder="Last Name"
-                onChange={(e) => setLastname(e.target.value)}
-                className="opacity-100 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
 
             {/* Username */}
             <div className="flex flex-col pt-4">
@@ -139,6 +120,19 @@ export function SignupPage() {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
+             {/* email */}
+             <div className="flex flex-col pt-4">
+              <label htmlFor="username" className="text-lg">
+                Email
+              </label>
+              <input
+                type="text"
+                id="email"
+                placeholder="email"
+                onChange={(e) => setEmail(e.target.value)}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
 
             {/* Sign Up Button */}
             <button
@@ -147,6 +141,9 @@ export function SignupPage() {
             >
               Sign Up
             </button>
+            <div>
+              {errormessgae}
+            </div>
           </form>
 
           {/* Sign In Link */}

@@ -1,12 +1,13 @@
-import { RecoilRoot, useRecoilState } from "recoil";
-import { username, userpassword } from "../atoms/signupatoms";
+import { RecoilRoot, useRecoilState, useSetRecoilState } from "recoil";
+import { userpassword } from "../atoms/signupatoms";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import spicesside from '../assets/spices.jpg';
+import { userDetailAtom } from "../atoms/userAtom";
 
 export function SigninPage() {
-    const [signinusername, setUsername] = useRecoilState(username);
+    const [userEmail, setUserEmail] = useState('');
     const [password, setPassword] = useRecoilState(userpassword);
 
     return (
@@ -33,7 +34,7 @@ export function SigninPage() {
                                 <input
                                     type="email"
                                     id="email"
-                                    onChange={(e) => setUsername(e.target.value)}
+                                    onChange={(e) => setUserEmail(e.target.value)}
                                     placeholder="your@email.com"
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
                                 />
@@ -51,9 +52,12 @@ export function SigninPage() {
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
                                 />
                             </div>
+                            <div>
+                                {}
+                            </div>
                         </form>
                         <div>
-                            <SigninButton username={signinusername} password={password} />
+                            <SigninButton username={userEmail} password={password} />
                         </div>
                         <div className="text-center pt-12 pb-12">
                             <p>
@@ -84,19 +88,21 @@ export function SigninPage() {
 
 function SigninButton({ username, password }) {
     const [signinsuccess, setSigninSuccess] = useState(null);
-    const navigate = useNavigate();
+    const setUserinfo = useSetRecoilState(userDetailAtom);
 
     const handleSignin = async () => {
-        await axios.post('http://localhost:3000/api/v1/user/signin', {
-            "username": username,
+        await axios.post('https://organic-spices.azurewebsites.net/api/login', {
+            "email": username,
             "password": password,
         })
         .then(async (res) => {
             if (res.data.token) {
                 localStorage.setItem('token', res.data.token);
                 setSigninSuccess(true);
+                setUserinfo(res.data.user);
                 window.location.href = '/dashboard';
             } else {
+                setErrorMessage(res.data);
                 setSigninSuccess(false);
             }
         })

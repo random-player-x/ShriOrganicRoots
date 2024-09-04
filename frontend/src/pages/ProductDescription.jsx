@@ -24,7 +24,7 @@ export function ProductDetail({name, price, category, rating, brandName, bulkPri
         />
         <div>
           <Typography className="mb-4" variant="h3">
-            Premium Blazer
+            Premium Spices
           </Typography>
           <Typography variant="h5">$1,490</Typography>
           <Typography className="!mt-4 text-base font-normal leading-[27px] !text-gray-500">

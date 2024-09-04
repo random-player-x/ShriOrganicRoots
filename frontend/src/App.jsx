@@ -15,9 +15,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           { token ? <Route path="/" element={<Dashboard />} />:<Route path="/" element={<SIGNIN />} /> }
-          { token ? <Route path="/dashboard" element={<Dashboard />} />: "You are not signed in" }
           <Route path="/signin" element={<SIGNIN />} />
           <Route path="/signup" element={<SIGNUP />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path = '/productdetail' element={<ProductDetail/>} />
 
         </Routes>

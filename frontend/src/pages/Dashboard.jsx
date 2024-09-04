@@ -128,7 +128,6 @@ export const Items = () => {
             {/* Render the products for the current page */}
             <div className="grid grid-cols-2 gap-6 mt-10 lg:mt-16 lg:gap-4 lg:grid-cols-4 mb-10">
               {displayedItems.map((item) => (<div>
-                hi there
                 <ProductTile
                   key={item['Product Name']}
                   name={item['Product Name']}
