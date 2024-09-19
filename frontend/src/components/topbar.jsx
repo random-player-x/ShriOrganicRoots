@@ -14,7 +14,7 @@ export const Topbar = () => {
               </a>
               {/* Nav Links */}
               <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-                <li><a className="hover:text-gray-200" href="#">Home</a></li>
+                <li><a className="hover:text-gray-200" href="/dashboard">Home</a></li>
                 <li><a className="hover:text-gray-200" href="#">Category</a></li>
                 <li><a className="hover:text-gray-200" href="#">Collections</a></li>
                 <li><a className="hover:text-gray-200 text-yellow-200" href="#">Contact Us</a></li>

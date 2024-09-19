@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
+
 import nutmegt from '../assets/products/nutmeg.png'
 
-export default function ProductTile({name, price, category, rating, brandName}){
+export default function ProductTile({id, name, price, category, rating, brandName}){
     return(
         <div className="relative group m-5 bg-gray-50">
                 <div className="overflow-hidden aspect-w-1 aspect-h-1">
@@ -10,7 +10,7 @@ export default function ProductTile({name, price, category, rating, brandName}){
                 <div className="flex items-start justify-between mt-4 space-x-4">
                     <div>
                         <h3 className="text-xs font-semibold text-gray-900 sm:text-sm md:text-base">
-                            <a href= {`/productdetail/${name}`} title="" className='hover:text-orange-400'>
+                            <a href= {`/productpage/${id}`} title="" className='hover:text-orange-400'>
                              {name}<br /> <div className='font-light'>{brandName}</div>
                                 <span className="absolute inset-0" aria-hidden="true"></span>
                             </a>
@@ -22,13 +22,12 @@ export default function ProductTile({name, price, category, rating, brandName}){
                             </div>
                         </h3>
                         <div>
-
                         </div>
                     </div>
 
                     <div className="text-right">
                         <div>Price per Unit</div>
-                        <p className="text-4xl font-bold text-gray-900 sm:text-sm md:text-2xl">{price}$</p>
+                        <p className="text-4xl font-bold text-gray-900 sm:text-sm md:text-2xl">${price}</p>
                     </div>
                 </div>
             </div>

@@ -129,6 +129,7 @@ export const Items = () => {
             <div className="grid grid-cols-2 gap-6 mt-10 lg:mt-16 lg:gap-4 lg:grid-cols-4 mb-10">
               {displayedItems.map((item) => (<div>
                 <ProductTile
+                  id={item['id']}
                   key={item['Product Name']}
                   name={item['Product Name']}
                   brandName={item['Brand Name']}
