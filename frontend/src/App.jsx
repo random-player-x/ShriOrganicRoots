@@ -4,7 +4,8 @@ import SIGNUP, { SignupPage } from './pages/Signup'
 import SIGNIN, { SigninPage } from './pages/Signin'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Dashboard } from './pages/Dashboard'
-import PRODUCT, { ProductPage } from './pages/ProductPage'
+import PRODUCT  from './pages/ProductPage'
+import PROFILEPAGE from './pages/UserProfilePage'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signup" element={<SIGNUP />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path = '/productpage/:id' element={<PRODUCT/>} />
+          <Route path = "/Userprofile" element = {<PROFILEPAGE/>}/>
 
         </Routes>
       </BrowserRouter>

@@ -17,7 +17,7 @@ export default function ProductTile({id, name, price, category, rating, brandNam
                             <div className='flex '>
                                 Rating: <div className='font-light ml-2'>{rating}</div>
                             </div>
-                            <div className='rounded-2xl px-2 text-sm bg-yellow-400'>
+                            <div className='rounded-2xl px-2 inline-block text-sm bg-yellow-400'>
                                 {category}
                             </div>
                         </h3>
