@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Dashboard } from './pages/Dashboard'
 import PRODUCT  from './pages/ProductPage'
 import PROFILEPAGE from './pages/UserProfilePage'
-
+import CARTPAGE from './pages/CartPage'
 
 function App() {
   const token = localStorage.getItem('token');
@@ -21,7 +21,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path = '/productpage/:id' element={<PRODUCT/>} />
           <Route path = "/Userprofile" element = {<PROFILEPAGE/>}/>
-
+          <Route path = "/Cart" element = {<CARTPAGE/>}/>
         </Routes>
       </BrowserRouter>
     </div>
