@@ -1,10 +1,30 @@
 import { RecoilRoot } from "recoil"
 import nutmegt from '../assets/products/nutmeg.png';
 import { Topbar } from "../components/topbar";
-
+import React, { useState } from 'react';
 
 export function CartPage(){
-
+    const [cartItems, setCartItems] = useState([
+        { id: 1, name: "Nutmeg", price: 120, quantity: 1 },
+        { id: 2, name: "Turmeric", price: 120, quantity: 2 },
+        { id: 3, name: "Cloves", price: 120, quantity: 1 },
+      ]);
+      const item1 = cartItems[0];
+      const item2 = cartItems[1];
+      const item3 = cartItems[2];
+    
+      // Calculate total price manually
+      const total = item1.price * item1.quantity + item2.price * item2.quantity + item3.price * item3.quantity;
+    
+      // Functions to manually increase/decrease quantity for each item
+      const increaseItem1 = () => setCartItems(prev => [{ ...item1, quantity: item1.quantity + 1 }, item2, item3]);
+      const increaseItem2 = () => setCartItems(prev => [item1, { ...item2, quantity: item2.quantity + 1 }, item3]);
+      const increaseItem3 = () => setCartItems(prev => [item1, item2, { ...item3, quantity: item3.quantity + 1 }]);
+    
+      const decreaseItem1 = () => setCartItems(prev => [{ ...item1, quantity: item1.quantity > 1 ? item1.quantity - 1 : 1 }, item2, item3]);
+      const decreaseItem2 = () => setCartItems(prev => [item1, { ...item2, quantity: item2.quantity > 1 ? item2.quantity - 1 : 1 }, item3]);
+      const decreaseItem3 = () => setCartItems(prev => [item1, item2, { ...item3, quantity: item3.quantity > 1 ? item3.quantity - 1 : 1 }]);
+    
     return(
         <div>
             <Topbar/>
@@ -42,7 +62,7 @@ export function CartPage(){
                         <div className="grid grid-cols-1 md:grid-cols-4 w-full">
                             <div className="md:col-span-2">
                                 <div className="flex flex-col max-[500px]:items-center gap-3">
-                                    <h6 className="font-semibold text-base leading-7 text-black">Nutmeg</h6>
+                                    <h6 className="font-semibold text-base leading-7 text-black">{item1.name}</h6>
                                     <h6 className="font-normal text-base leading-7 text-gray-500">spices</h6>
                                     <h6 className="font-medium text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-indigo-600">$120.00</h6>
                                 </div>
@@ -50,7 +70,8 @@ export function CartPage(){
                             <div className="flex items-center max-[500px]:justify-center h-full max-md:mt-3">
                                 <div className="flex items-center h-full">
                                     <button
-                                        className="group rounded-l-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300">
+                                        className="group rounded-l-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300"
+                                        onClick={decreaseItem1}>
                                         <svg className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                                             xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                             viewBox="0 0 22 22" fill="none">
@@ -64,8 +85,9 @@ export function CartPage(){
                                     </button>
                                     <input type="text"
                                         className="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[73px] min-w-[60px] placeholder:text-gray-900 py-[15px]  text-center bg-transparent"
-                                        placeholder="1"/>
+                                        placeholder={item1.quantity}/>
                                     <button
+                                        onClick={increaseItem1}
                                         className="group rounded-r-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300">
                                         <svg className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                                             xmlns="http://www.w3.org/2000/svg" width="22" height="22"
@@ -81,7 +103,7 @@ export function CartPage(){
                                 </div>
                             </div>
                             <div className="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full">
-                                <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">$120.00</p>
+                                <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">${item1.price * item1.quantity}</p>
                             </div>
                         </div>
                     </div>
@@ -94,7 +116,7 @@ export function CartPage(){
                         <div className="grid grid-cols-1 md:grid-cols-4 w-full">
                             <div className="md:col-span-2">
                                 <div className="flex flex-col max-[500px]:items-center gap-3">
-                                    <h6 className="font-semibold text-base leading-7 text-black"> Turmeric</h6>
+                                    <h6 className="font-semibold text-base leading-7 text-black">{item2.name}</h6>
                                     <h6 className="font-normal text-base leading-7 text-gray-500">spices</h6>
                                     <h6 className="font-medium text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-indigo-600">$120.00</h6>
                                 </div>
@@ -102,6 +124,7 @@ export function CartPage(){
                             <div className="flex items-center max-[500px]:justify-center h-full max-md:mt-3">
                                 <div className="flex items-center h-full">
                                     <button
+                                        onClick={decreaseItem2}
                                         className="group rounded-l-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300">
                                         <svg className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                                             xmlns="http://www.w3.org/2000/svg" width="22" height="22"
@@ -116,8 +139,9 @@ export function CartPage(){
                                     </button>
                                     <input type="text"
                                         className="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[73px] min-w-[60px] placeholder:text-gray-900 py-[15px]  text-center bg-transparent"
-                                        placeholder="2"/>
+                                        placeholder={item2.quantity}/>
                                     <button
+                                        onClick={increaseItem2}
                                         className="group rounded-r-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300">
                                         <svg className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                                             xmlns="http://www.w3.org/2000/svg" width="22" height="22"
@@ -133,7 +157,7 @@ export function CartPage(){
                                 </div>
                             </div>
                             <div className="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full">
-                                <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">$240.00</p>
+                                <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">${item2.price * item2.quantity}</p>
                             </div>
                         </div>
                     </div>
@@ -146,7 +170,7 @@ export function CartPage(){
                         <div className="grid grid-cols-1 md:grid-cols-4 w-full">
                             <div className="md:col-span-2">
                                 <div className="flex flex-col max-[500px]:items-center gap-3">
-                                    <h6 className="font-semibold text-base leading-7 text-black"> cloves</h6>
+                                    <h6 className="font-semibold text-base leading-7 text-black">{item3.name}</h6>
                                     <h6 className="font-normal text-base leading-7 text-gray-500">spices</h6>
                                     <h6 className="font-medium text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-indigo-600">$120.00</h6>
                                 </div>
@@ -154,6 +178,7 @@ export function CartPage(){
                             <div className="flex items-center max-[500px]:justify-center h-full max-md:mt-3">
                                 <div className="flex items-center h-full">
                                     <button
+                                        onClick={decreaseItem3}
                                         className="group rounded-l-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300">
                                         <svg className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                                             xmlns="http://www.w3.org/2000/svg" width="22" height="22"
@@ -168,8 +193,9 @@ export function CartPage(){
                                     </button>
                                     <input type="text"
                                         className="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[73px] min-w-[60px] placeholder:text-gray-900 py-[15px]  text-center bg-transparent"
-                                        placeholder="1"/>
+                                        placeholder={item3.quantity}/>
                                     <button
+                                        onClick={increaseItem3}
                                         className="group rounded-r-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300">
                                         <svg className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                                             xmlns="http://www.w3.org/2000/svg" width="22" height="22"
@@ -185,7 +211,7 @@ export function CartPage(){
                                 </div>
                             </div>
                             <div className="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full">
-                                <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">$120.00</p>
+                                <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">${item3.price * item3.quantity}</p>
                             </div>
                         </div>
                     </div>
@@ -211,7 +237,7 @@ export function CartPage(){
                     <div className="mt-8">
                         <div className="flex items-center justify-between pb-6">
                             <p className="font-normal text-lg leading-8 text-black">3 Items</p>
-                            <p className="font-medium text-lg leading-8 text-black">$480.00</p>
+                            <p className="font-medium text-lg leading-8 text-black">${total}</p>
                         </div>
                         <form>
                             <label className="flex  items-center mb-1.5 text-gray-600 text-sm font-medium">Shipping
@@ -309,7 +335,7 @@ export function CartPage(){
                             </div>
                             <div className="flex items-center justify-between py-8">
                                 <p className="font-medium text-xl leading-8 text-black">3 Items</p>
-                                <p className="font-semibold text-xl leading-8 text-indigo-600">$485.00</p>
+                                <p className="font-semibold text-xl leading-8 text-indigo-600">${total}</p>
                             </div>
                             <button
                                 className="w-full text-center bg-indigo-600 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700">Checkout</button>
