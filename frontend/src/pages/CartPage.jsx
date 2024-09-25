@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 export function CartPage(){
     const [cartItems, setCartItems] = useState([
         { id: 1, name: "Nutmeg", price: 120, quantity: 1 },
-        { id: 2, name: "Turmeric", price: 120, quantity: 2 },
+        { id: 2, name: "Turmeric", price: 120, quantity: 1 },
         { id: 3, name: "Cloves", price: 120, quantity: 1 },
       ]);
       const item1 = cartItems[0];
