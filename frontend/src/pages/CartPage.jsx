@@ -4,27 +4,7 @@ import { Topbar } from "../components/topbar";
 import React, { useState } from 'react';
 
 export function CartPage(){
-    const [cartItems, setCartItems] = useState([
-        { id: 1, name: "Nutmeg", price: 120, quantity: 1 },
-        { id: 2, name: "Turmeric", price: 120, quantity: 1 },
-        { id: 3, name: "Cloves", price: 120, quantity: 1 },
-      ]);
-      const item1 = cartItems[0];
-      const item2 = cartItems[1];
-      const item3 = cartItems[2];
-    
-      // Calculate total price manually
-      const total = item1.price * item1.quantity + item2.price * item2.quantity + item3.price * item3.quantity;
-    
-      // Functions to manually increase/decrease quantity for each item
-      const increaseItem1 = () => setCartItems(prev => [{ ...item1, quantity: item1.quantity + 1 }, item2, item3]);
-      const increaseItem2 = () => setCartItems(prev => [item1, { ...item2, quantity: item2.quantity + 1 }, item3]);
-      const increaseItem3 = () => setCartItems(prev => [item1, item2, { ...item3, quantity: item3.quantity + 1 }]);
-    
-      const decreaseItem1 = () => setCartItems(prev => [{ ...item1, quantity: item1.quantity > 1 ? item1.quantity - 1 : 1 }, item2, item3]);
-      const decreaseItem2 = () => setCartItems(prev => [item1, { ...item2, quantity: item2.quantity > 1 ? item2.quantity - 1 : 1 }, item3]);
-      const decreaseItem3 = () => setCartItems(prev => [item1, item2, { ...item3, quantity: item3.quantity > 1 ? item3.quantity - 1 : 1 }]);
-    
+
     return(
         <div>
             <Topbar/>
