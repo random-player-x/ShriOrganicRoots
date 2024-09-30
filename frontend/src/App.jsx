@@ -7,13 +7,12 @@ import { Dashboard } from './pages/Dashboard'
 import PRODUCT  from './pages/ProductPage'
 import PROFILEPAGE from './pages/UserProfilePage'
 import CARTPAGE from './pages/CartPage'
-<<<<<<< HEAD
 
-=======
+
 import ADMINPROFILEPAGE from './pages/AdminProfilePage'
 import Orders from './components/Orders'
 import USERS from './components/Users'
->>>>>>> 76c43bdd5d23629fa94d0f2b6856e5aacad4088c
+
 
 function App() {
   const token = localStorage.getItem('token');

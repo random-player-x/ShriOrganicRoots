@@ -63,7 +63,7 @@ export function CartComponent({id, name, price, category}){
                 <div className="flex flex-col max-[500px]:items-center gap-3">
                     <h6 className="font-semibold text-base leading-7 text-black">{name}</h6>
                     <h6 className="font-normal text-base leading-7 text-gray-500">{category}</h6>
-                    <h6 className="font-medium text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-indigo-600">${price}</h6>
+                    <h6 className="font-medium text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-indigo-600">${parseFloat(price).toFixed(2)}</h6>
                 </div>
             </div>
             <div className=" items-center max-[500px]:justify-center h-full max-md:mt-3">
@@ -106,7 +106,7 @@ export function CartComponent({id, name, price, category}){
                  </div>
             </div>
             <div className="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full">
-                <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">${currentsum}</p>
+                <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">${parseFloat(currentsum).toFixed(2)}</p>
             </div>
         </div>
     </div>
