@@ -7,12 +7,14 @@ import {
 import { Topbar } from "../components/topbar";
 import nutmegt from '../assets/products/nutmeg.png';
 import { useParams } from "react-router-dom";
-import { RecoilRoot, useRecoilValue } from "recoil";
+import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { spiceAtom } from "../assets/spices";
+import { cartAtom } from "../atoms/CartAtom";
 
 export function ProductPage() {
   const { id } = useParams();
   const product = useRecoilValue(spiceAtom).find((p) => p.id === parseInt(id));
+  const [itemsArray, setitemsArray] = useRecoilState(cartAtom) // for adding items to cartArray
   
   if (!product) {
     return <h2>Product Not Found</h2>;
@@ -76,9 +78,22 @@ export function ProductPage() {
               </div>
 
               <div className="mb-4 flex w-full items-center gap-3 md:w-1/2">
-                <Button className="bg-orange-400 mt-10 w-full py-2 text-black text-md">
+                <Button onClick={()=> {
+                  try
+                  {setitemsArray((prevItems) => [...prevItems, id]);
+                    document.getElementById("Cartmessage").innerHTML = 'Item Added to cart';
+                  }
+                  catch{
+                    document.getElementById("Cartmessage").innerHTML = "Item failed to Add";
+
+                  }
+
+                }} className="bg-orange-400 mt-10 w-full py-2 text-black text-md">
                   Add to Cart
                 </Button>
+                <div>
+                  <p id="Cartmessage"></p>
+                </div>
               </div>
             </div>
           </div>

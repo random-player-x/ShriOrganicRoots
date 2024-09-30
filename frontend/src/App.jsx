@@ -7,7 +7,6 @@ import { Dashboard } from './pages/Dashboard'
 import PRODUCT  from './pages/ProductPage'
 import PROFILEPAGE from './pages/UserProfilePage'
 import CARTPAGE from './pages/CartPage'
-import CARTPAGE from './pages/CartPage'
 
 
 function App() {
