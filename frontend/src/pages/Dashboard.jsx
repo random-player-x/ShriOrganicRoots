@@ -13,7 +13,6 @@ export function Dashboard(){
         <RecoilRoot>
             <div>
                 <Topbar/>
-                <hr className="h-0.5 my-2 bg-white shadow-lg border-1 "/>
                 <Items/>
             </div>
         </RecoilRoot>
@@ -97,7 +96,7 @@ export const Items = () => {
     // Handle search term change and update displayed items
   
     return (
-      <section className="py-12 bg-white sm:py-16 lg:py-2">
+      <section className="bg-white sm:py-16 lg:py-0">
         <div className="shadow-2xl relative">
           <img className="object-cover w-full" src={spicebanner} alt="Login Visual" />
           <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
@@ -141,9 +140,8 @@ export const Items = () => {
                 
               ))}
             </div>
-  
             {/* Pagination controls */}
-            <div className="flex justify-center mt-6">
+            {totalPages > 1 && ( <div className="flex justify-center mt-6">
               <button
                 onClick={handlePrevPage}
                 disabled={currentPage === 1}
@@ -161,8 +159,11 @@ export const Items = () => {
               >
                 Next
               </button>
-            </div>
+            </div>)}
+           
           </div>
+          
         </div>
       </section>
-    );}
+    );
+  }

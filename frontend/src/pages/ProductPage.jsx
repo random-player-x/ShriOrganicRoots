@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import {
   Button,
   Rating,
@@ -15,7 +15,7 @@ export function ProductPage() {
   const { id } = useParams();
   const product = useRecoilValue(spiceAtom).find((p) => p.id === parseInt(id));
   const [itemsArray, setitemsArray] = useRecoilState(cartAtom) // for adding items to cartArray
-  
+  const [Cartmessage, setCartmessage] = useState('Add to cart');
   if (!product) {
     return <h2>Product Not Found</h2>;
   }
@@ -24,7 +24,7 @@ export function ProductPage() {
     <RecoilRoot>
       <div className="">
         <Topbar />
-        <section className="relative py-4 flex flex-col md:flex-row md:py-6">
+        <section className="relative flex flex-col md:flex-row md:">
           <div className="mx-auto container grid place-items-center grid-cols-1 md:grid-cols-2 gap-6">
             {/* Product Image */}
             <div className="col-span-1">
@@ -81,19 +81,16 @@ export function ProductPage() {
                 <Button onClick={()=> {
                   try
                   {setitemsArray((prevItems) => [...prevItems, id]);
-                    document.getElementById("Cartmessage").innerHTML = 'Item Added to cart';
+                    setCartmessage('Item Added to cart');
                   }
                   catch{
-                    document.getElementById("Cartmessage").innerHTML = "Item failed to Add";
+                    setCartmessage('Item failed to Add');
 
                   }
 
                 }} className="bg-orange-400 mt-10 w-full py-2 text-black text-md">
-                  Add to Cart
+                  {Cartmessage}
                 </Button>
-                <div>
-                  <p id="Cartmessage"></p>
-                </div>
               </div>
             </div>
           </div>

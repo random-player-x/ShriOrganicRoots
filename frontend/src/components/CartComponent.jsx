@@ -101,7 +101,7 @@ export function CartComponent({id, name, price, category}){
                     </button>
                     
                 </div>
-                <div className=" flex items-center justify-center  ">
+                <div className=" flex items-center justify-center ">
                     <button onClick={deleteItem} className="border border-red-400 hover:bg-red-100 shadow-lg rounded-lg py-1 px-2">Delete</button>
                  </div>
             </div>
