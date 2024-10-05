@@ -96,11 +96,11 @@ export const Items = () => {
     // Handle search term change and update displayed items
   
     return (
-      <section className="bg-white sm:py-16 lg:py-0">
+      <section className="bg-white sm:pb-10 lg:pb-10">
         <div className="shadow-2xl relative">
           <img className="object-cover w-full" src={spicebanner} alt="Login Visual" />
           <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
-            <h1 className="absolute bottom-0 left-0 right-0 text-4xl font-mono mb-10 font-bold text-center text-white p-4d">
+            <h1 className="absolute bottom-0 left-0 right-0 text-2xl font-mono mb-0 font-bold text-center text-white p-4d sm:text-4xl sm:mb-10">
               Welcome to the garden of Indian spices!
             </h1>
           </div>
@@ -125,7 +125,7 @@ export const Items = () => {
   
           <div>
             {/* Render the products for the current page */}
-            <div className="grid grid-cols-2 gap-6 mt-10 lg:mt-16 lg:gap-4 lg:grid-cols-4 mb-10">
+            <div className="grid sm:grid-cols-2 gap-6 mt-10 lg:mt-16 lg:gap-4 lg:grid-cols-4 mb-10">
               {displayedItems.map((item) => (<div>
                 <ProductTile
                   id={item['id']}

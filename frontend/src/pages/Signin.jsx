@@ -21,7 +21,7 @@ export function SigninPage() {
                         </a>
                     </div>
 
-                    <div className="flex bg-gray-50 rounded shadow-lg ml-32  h-[500px] w-[500px] flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
+                    <div className="flex bg-gray-50 rounded shadow-lg mx-auto h-auto w-11/12 md:w-3/4 lg:w-3/4 flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-0">
                         <p className="text-center text-3xl mt-10">Welcome.</p>
                         <form
                             className="flex flex-col pt-3 md:pt-8"
@@ -71,14 +71,14 @@ export function SigninPage() {
                 </div>
 
                 {/* Image Section */}
-                <div className="w-1/2 shadow-2xl relative">
+                <div className="hidden md:block w-full md:w-1/2 shadow-2xl relative">
                     <img
                         className="object-cover w-full h-screen"
                         src={spicesside}
                         alt="Login Visual"
                     />
                     <div className="absolute top-0 left-0 w-full h-full flex ml-10 items-center">
-                        <h1 className="text-white text-8xl font-bold">Indian <br />Organic <br /> spices !</h1>
+                        <h1 className="text-white text-4xl md:text-6xl lg:text-8xl font-bold">Indian <br />Organic <br /> spices !</h1>
                     </div>
                 </div>
             </div>
@@ -91,24 +91,15 @@ function SigninButton({ username, password }) {
     const setUserinfo = useSetRecoilState(userDetailAtom);
 
     const handleSignin = async () => {
-        await axios.post('https://organicspices.azurewebsites.net/api/login?', {
+        await axios.post('https://organic-spices.azurewebsites.net/api/login', {
             "email": username,
             "password": password,
         })
         .then(async (res) => {
             if (res.data.token) {
-                // Store token in localStorage
                 localStorage.setItem('token', res.data.token);
-
-                // Store the entire user info as a string in localStorage
-                localStorage.setItem('userInfo', JSON.stringify(res.data.user));
-
                 setSigninSuccess(true);
-
-                // Update Recoil state with user info
                 setUserinfo(res.data.user);
-
-                // Redirect to dashboard
                 window.location.href = '/dashboard';
             } else {
                 setErrorMessage(res.data);
@@ -132,7 +123,6 @@ function SigninButton({ username, password }) {
         </div>
     );
 }
-
 
 export default function SIGNIN() {
     return (

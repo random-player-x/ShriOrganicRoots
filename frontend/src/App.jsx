@@ -7,7 +7,7 @@ import { Dashboard } from './pages/Dashboard'
 import PRODUCT  from './pages/ProductPage'
 import PROFILEPAGE from './pages/UserProfilePage'
 import CARTPAGE from './pages/CartPage'
-
+import OrderPage from './pages/userOrders'
 
 import ADMINPROFILEPAGE from './pages/AdminProfilePage'
 import Orders from './components/Orders'
@@ -33,6 +33,7 @@ function App() {
           <Route path = "/orders" element={<Orders/>} />
           <Route path = "/Users" element={<USERS/>} />
           <Route path = "/checkout" element={<CHECKOUTPAGE/>} />
+          <Route path = "/userorders" element={<OrderPage/>} />
         </Routes>
       </BrowserRouter>
     </div>
