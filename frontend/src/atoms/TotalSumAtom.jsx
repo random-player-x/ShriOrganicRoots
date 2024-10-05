@@ -5,5 +5,13 @@ import { cartAtom } from "../atoms/CartAtom";
 
 export const TotalSumAtom = atom({
     key: "TotalSumAtom",
-    default: 0
-})
+    default: JSON.parse(localStorage.getItem("TotalSum")) || [],
+    effects_UNSTABLE: [
+      ({ onSet }) => {
+        onSet(sum => {
+          localStorage.setItem("TotalSum", JSON.stringify(sum));
+        });
+      }
+    ]
+  });
+  

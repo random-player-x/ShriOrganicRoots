@@ -17,7 +17,7 @@ export function SignupPage() {
     const navigate = useNavigate();
     const handleSignup = () => {
       try{
-        axios.post("https://organic-spices.azurewebsites.net/api/signup", {
+        axios.post("https://organicspices.azurewebsites.net/api/signup?", {
             "username": usernames,
             "password": password,
             "email": email
@@ -43,32 +43,6 @@ export function SignupPage() {
     };
 
     return (
-        // <div className="flex justify-center">
-        //     <div className="shadow-md bg-gray-100 w-[450px] h-[550px] items-center justify-center m-20 rounded-lg h-auto p-5">
-        //         <div className="m-5 flex justify-center">
-        //             <Heading1 />
-        //         </div>
-        //         <div className="m-5 flex justify-center">
-        //             <Subheading />
-        //         </div>
-        //         <div className="ml-10 mt-10">
-        //             <Inputbox onchange={(e) => setFirstname(e.target.value)} placeholder="Enter your firstname" label="Firstname" />
-        //             <Inputbox onchange={(e) => setLastname(e.target.value)} placeholder="Enter your Lastname" label="Lastname" />
-        //             <Inputbox onchange={(e) => setUsername(e.target.value)} placeholder="Enter your Username" label="Username" />
-        //             <Inputbox onchange={(e) => setPassword(e.target.value)} placeholder="Enter your password" label="Password" />
-        //         </div>
-        //         <div className="flex justify-center">
-        //             <SignupButton onPress={handleSignup} />
-        //         </div>
-        //         <div className="flex justify-center mt-5">
-        //             <div className="mr-1 text-sm">Already signed up ?</div> 
-        //             <div className="text-sm hover:text-blue-400"><Link to= '/signin'> Login</Link></div>
-        //         </div>
-        //         <div className="flex justify-center text-sm  mt-3 font-medium">
-        //             {success === null ? "" : (success ?  <div  className="text-green-400">user created succesfully</div>: <div className="text-red-400"> could not create user</div>)}
-        //         </div>
-        //     </div>
-        // </div>
         <div
       className="bg-white font-family-karla h-screen flex justify-center items-center"
       style={{

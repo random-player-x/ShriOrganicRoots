@@ -7,18 +7,44 @@ import {
 import { Topbar } from "../components/topbar";
 import nutmegt from '../assets/products/nutmeg.png';
 import { useParams } from "react-router-dom";
-import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
 import { spiceAtom } from "../assets/spices";
 import { cartAtom } from "../atoms/CartAtom";
 
 export function ProductPage() {
   const { id } = useParams();
   const product = useRecoilValue(spiceAtom).find((p) => p.id === parseInt(id));
-  const [itemsArray, setitemsArray] = useRecoilState(cartAtom) // for adding items to cartArray
-  const [Cartmessage, setCartmessage] = useState('Add to cart');
+  const [itemsArray, setItemsArray] = useRecoilState(cartAtom); // for adding items to cartArray
+  const [cartMessage, setCartMessage] = useState('Add to cart');
+  const [quantity, setQuantity] = useState(1); // Default quantity set to 1
+
   if (!product) {
     return <h2>Product Not Found</h2>;
   }
+
+  const handleAddToCart = () => {
+    try {
+      setItemsArray((prevItems) => {
+        // Check if the product already exists in the cart
+        const existingItemIndex = prevItems.findIndex(item => item.id === parseInt(id));
+  
+        // If the product is already in the cart, update its quantity
+        if (existingItemIndex !== -1) {
+          const updatedItems = [...prevItems];
+          updatedItems[existingItemIndex].quantity += quantity; // Update the quantity
+          return updatedItems;
+        } else {
+          // If the product is not in the cart, add it as a new item
+          return [...prevItems, { id: parseInt(id), quantity: quantity, price: product['Price per Unit ($)']}];
+        }
+      });
+  
+      setCartMessage('Item Added to cart');
+    } catch (error) {
+      setCartMessage('Item added to cart');
+    }
+  };
+  
 
   return (
     <RecoilRoot>
@@ -77,19 +103,30 @@ export function ProductPage() {
                 </div>
               </div>
 
+              {/* Quantity Selector */}
+              <div className="mt-4">
+                <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+                  Quantity
+                </label>
+                <select
+                  id="quantity"
+                  name="quantity"
+                  className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                >
+                  {/* Options for selecting quantity */}
+                  {[1, 2, 3, 4, 5].map((q) => (
+                    <option key={q} value={q}>
+                      {q}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div className="mb-4 flex w-full items-center gap-3 md:w-1/2">
-                <Button onClick={()=> {
-                  try
-                  {setitemsArray((prevItems) => [...prevItems, id]);
-                    setCartmessage('Item Added to cart');
-                  }
-                  catch{
-                    setCartmessage('Item failed to Add');
-
-                  }
-
-                }} className="bg-orange-400 mt-10 w-full py-2 text-black text-md">
-                  {Cartmessage}
+                <Button onClick={handleAddToCart} className="bg-orange-400 mt-10 w-full py-2 text-black text-md">
+                  {cartMessage}
                 </Button>
               </div>
             </div>

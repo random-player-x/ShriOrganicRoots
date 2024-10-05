@@ -10,7 +10,7 @@ export const Topbar = () => {
             <div className="px-5 xl:px-12 py-6 flex w-full items-center">
               <a className="text-3xl font-bold font-heading" href="#">
                 {/* <img className="h-9" src="logo.png" alt="logo"> */}
-                Organic Spices.
+                Shri.Organic.Roots.
               </a>
               {/* Nav Links */}
               <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">

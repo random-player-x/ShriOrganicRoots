@@ -12,6 +12,7 @@ import CARTPAGE from './pages/CartPage'
 import ADMINPROFILEPAGE from './pages/AdminProfilePage'
 import Orders from './components/Orders'
 import USERS from './components/Users'
+import CHECKOUTPAGE, { CheckOutPage } from './pages/CheckOutPage'
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path = "/admin" element = {<ADMINPROFILEPAGE/>}/>
           <Route path = "/orders" element={<Orders/>} />
           <Route path = "/Users" element={<USERS/>} />
+          <Route path = "/checkout" element={<CHECKOUTPAGE/>} />
         </Routes>
       </BrowserRouter>
     </div>

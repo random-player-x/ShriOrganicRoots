@@ -4,14 +4,19 @@ import { RecoilRoot } from "recoil";
 import { Topbar } from "../components/topbar";
 
 export function ProfilePage() {
+    // Recoil state for user info
     const [userinfo] = useRecoilState(userDetailAtom);
+
+    // Retrieve and parse user info from localStorage
+    const userdata = JSON.parse(localStorage.getItem('userInfo'));
 
     return (
         <div>
             <Topbar />
             <div className="m-5 shadow-lg h-screen">
                 <div className="m-10 mb-4 font-bold text-3xl">
-                    Username
+                    {/* Check if userdata exists and display the username */}
+                    {userdata ? userdata.username : "Guest"}
                 </div>
                 <div className="flex flex-col md:flex-row">
                     <div className="border m-10 mt-0 shadow-lg w-[200px] h-[200px] flex-shrink-0">
@@ -20,7 +25,7 @@ export function ProfilePage() {
                     <div className="flex-grow p-10 pt-0">
                         <div className="text-xl mb-5 font-bold"> Email Id: <br />
                             <div className="font-light text-lg">
-                                urj0230@gmail.com
+                                {userdata ? userdata.email : "No email found"}
                             </div>
                         </div>
                         <div className="text-xl font-bold"> Shipping Address: <br />

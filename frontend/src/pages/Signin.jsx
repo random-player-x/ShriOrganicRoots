@@ -91,15 +91,24 @@ function SigninButton({ username, password }) {
     const setUserinfo = useSetRecoilState(userDetailAtom);
 
     const handleSignin = async () => {
-        await axios.post('https://organic-spices.azurewebsites.net/api/login', {
+        await axios.post('https://organicspices.azurewebsites.net/api/login?', {
             "email": username,
             "password": password,
         })
         .then(async (res) => {
             if (res.data.token) {
+                // Store token in localStorage
                 localStorage.setItem('token', res.data.token);
+
+                // Store the entire user info as a string in localStorage
+                localStorage.setItem('userInfo', JSON.stringify(res.data.user));
+
                 setSigninSuccess(true);
+
+                // Update Recoil state with user info
                 setUserinfo(res.data.user);
+
+                // Redirect to dashboard
                 window.location.href = '/dashboard';
             } else {
                 setErrorMessage(res.data);
@@ -118,11 +127,12 @@ function SigninButton({ username, password }) {
                 <button onClick={handleSignin} className="w-full bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">Signin</button>
             </div>
             <div className="flex justify-center font-mono text-sm font-bold mt-2 text-red-400 min-h-[20px]">
-                {signinsuccess === null ? "" : (signinsuccess ? <div className="flex justify-center font-mono text-sm font-bold mt-2 text-green-400 min-h-[20px]">Logged in succesfully</div> : "Could not login!")}
+                {signinsuccess === null ? "" : (signinsuccess ? <div className="flex justify-center font-mono text-sm font-bold mt-2 text-green-400 min-h-[20px]">Logged in successfully</div> : "Could not login!")}
             </div>
         </div>
     );
 }
+
 
 export default function SIGNIN() {
     return (
