@@ -14,6 +14,7 @@ import Orders from './components/Orders'
 import USERS from './components/Users'
 import CHECKOUTPAGE, { CheckOutPage } from './pages/CheckOutPage'
 import MYORDERSPAGE from './pages/Myorders'
+import { Error404Page } from './pages/Error404Page'
 
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
           <Route path = "/Users" element={<USERS/>} />
           <Route path = "/checkout" element={<CHECKOUTPAGE/>} />
           <Route path = "/myorders" element={<MYORDERSPAGE/>} />
+          <Route path = "/pagenotfound" element={<Error404Page/>} />
+
         </Routes>
       </BrowserRouter>
     </div>

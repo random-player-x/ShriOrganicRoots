@@ -3,7 +3,7 @@ import { useRecoilValue, RecoilRoot } from "recoil";
 import { Topbar } from "../components/topbar";
 import { cartAtom } from "../atoms/CartAtom";
 import { spiceAtom } from "../assets/spices";
-import { Navigate, useNavigate } from 'react-router-dom'; // Import useNavigate for routing
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for routing
 
 
 export function CheckOutPage() {
